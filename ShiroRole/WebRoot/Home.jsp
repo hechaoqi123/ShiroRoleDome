@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -9,7 +10,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'index.jsp' starting page</title>
+    <title>My JSP 'Home.jsp' starting page</title>
+    
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -18,13 +20,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
+
   </head>
   
   <body>
-     <form action="login" method="post">
-        <input type="text" name="name"/>
-        <input type="password" name="password"/>
-        <input type="submit" value="提交"/>
-     </form>
+    主页
+    <c:forEach items="${menu}" var="menu">
+       <h1>${menu.key}</h1>
+       <c:forEach items="${menu.value}" var="list">
+          <h3><a href="${list.address }">${list.remark}</a></h3>
+       </c:forEach>
+    </c:forEach>
   </body>
 </html>

@@ -47,8 +47,6 @@
 		</property>
 		<property name="mappingResources">
 			<list>
-				<value>com/aaa/entity/Student.hbm.xml</value>
-				<value>com/aaa/entity/Classes.hbm.xml</value>
 		    </list>
 		</property>
 		</bean>
@@ -62,4 +60,41 @@
       <!-- 开启注解事务-->
      <tx:annotation-driven  transaction-manager="transactionManager"/>
      
-     </beans>
+     
+     
+     
+     <!-- shiro -->
+     <!-- 安全管理 -->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="authRealm"/><!-- 引用自定义的realm -->
+    <!--    <property name="cacheManager" ref="shiroEhcacheManager"/> -->
+    </bean>
+    <bean id="authRealm" class="com.aaa.bean.Realm"></bean>
+    <!-- 管理shiro常用对象实例 -->
+<!--     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+    
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+       <property name="securityManager" ref="securityManager"/>
+    </bean>
+     -->
+     <!-- Shiro过滤器 -->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">  
+     <!-- Shiro的核心安全接口,这个属性是必须的 -->  
+       <property name="securityManager" ref="securityManager"/>
+     <!-- 身份未认证,所要跳转到登录页面的配置 -->  
+       <property name="loginUrl" value="/index.jsp"/>
+     <!-- 权限认证失败，则跳转到指定页面 -->  
+       <property name="unauthorizedUrl" value="/unauthor.jsp"/>  
+     <!-- Shiro连接约束配置,即过滤链的定义 -->  
+       <property name="filterChainDefinitions">  
+           <value>  
+              /index.jsp=anon
+              /login=anon
+              
+             /**=authc
+           </value>  
+         </property>
+      </bean>  
+   </beans>
+     
+    

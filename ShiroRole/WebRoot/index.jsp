@@ -21,10 +21,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-     <form action="login" method="post">
-        <input type="text" name="name"/>
-        <input type="password" name="password"/>
-        <input type="submit" value="提交"/>
-     </form>
+    <h1>登录</h1>
+    <form action="login" method="post">
+      用户名:<input name="name"/><br/>
+      密码:<input type="password" name="password"/><br/>
+   <input type="submit" value="登陆"/>
+    </form>
+    <a href="register.jsp">点击注册</a>
   </body>
 </html>
